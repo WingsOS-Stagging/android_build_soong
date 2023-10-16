@@ -60,7 +60,7 @@ func robolectricTestSuite(ctx SingletonContext, files map[string]InstallPaths) W
 	for _, module := range SortedKeys(files) {
 		installedPaths = append(installedPaths, files[module]...)
 	}
-	testCasesDir := pathForInstall(ctx, ctx.Config().BuildOS, X86, "testcases", false)
+	testCasesDir := pathForInstall(ctx, ctx.Config().BuildOS, X86, "testcases")
 
 	outputFile := PathForOutput(ctx, "packaging", "robolectric-tests.zip")
 	rule := NewRuleBuilder(pctx, ctx)
@@ -68,7 +68,8 @@ func robolectricTestSuite(ctx SingletonContext, files map[string]InstallPaths) W
 		FlagWithOutput("-o ", outputFile).
 		FlagWithArg("-P ", "host/testcases").
 		FlagWithArg("-C ", testCasesDir.String()).
-		FlagWithRspFileInputList("-r ", outputFile.ReplaceExtension(ctx, "rsp"), installedPaths.Paths())
+		FlagWithRspFileInputList("-r ", outputFile.ReplaceExtension(ctx, "rsp"), installedPaths.Paths()).
+		Flag("-sha256")
 	rule.Build("robolectric_tests_zip", "robolectric-tests.zip")
 
 	return outputFile

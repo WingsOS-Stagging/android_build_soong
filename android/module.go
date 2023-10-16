@@ -372,7 +372,6 @@ type BaseModuleContext interface {
 	Device() bool
 	Darwin() bool
 	Windows() bool
-	Debug() bool
 	PrimaryArch() bool
 }
 
@@ -2574,7 +2573,6 @@ type baseModuleContext struct {
 	target        Target
 	multiTargets  []Target
 	targetPrimary bool
-	debug         bool
 
 	walkPath []Module
 	tagPath  []blueprint.DependencyTag
@@ -3175,10 +3173,6 @@ func (b *baseModuleContext) Darwin() bool {
 
 func (b *baseModuleContext) Windows() bool {
 	return b.os == Windows
-}
-
-func (b *baseModuleContext) Debug() bool {
-	return b.debug
 }
 
 func (b *baseModuleContext) PrimaryArch() bool {
