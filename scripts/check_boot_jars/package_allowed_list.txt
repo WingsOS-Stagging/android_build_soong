@@ -259,6 +259,10 @@ com\.google\.i18n\.phonenumbers
 org\.chromium\.arc
 org\.chromium\.arc\..*
 
+# Lineage adds
+vendor.lineage.health
+vendor.lineage.touch.V1_0
+
 # NV adds
 com\.nvidia
 com\.nvidia\..*
